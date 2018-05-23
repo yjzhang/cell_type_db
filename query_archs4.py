@@ -10,6 +10,7 @@ from uncurl_analysis import bulk_data
 
 ARCHS4_FILENAME = 'archs4/human_matrix.h5'
 TISSUES_FILENAME = 'archs4/tissue_means.h5'
+INDEX_FILENAME = 'archs4/nmslib_cosine_index'
 
 def query_tissues(data, gene_names, metric='poisson'):
     """
