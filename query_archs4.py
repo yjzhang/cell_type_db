@@ -5,12 +5,13 @@ import tables
 from scipy import sparse
 from tqdm import tqdm
 
+import uncurl
 from uncurl_analysis import bulk_data
 
 ARCHS4_FILENAME = 'archs4/human_matrix.h5'
 TISSUES_FILENAME = 'archs4/tissue_means.h5'
 
-def query_tissues(data, gene_names):
+def query_tissues(data, gene_names, metric='poisson'):
     """
     Args:
         data (array): 1d or 2d array of shape (genes, k) - same shape as M output
@@ -36,7 +37,7 @@ def query_tissues(data, gene_names):
         data_gene_ids_map[gene] = i
     db_gene_ids = []
     data_gene_ids = []
-    # TODO: this messes up the order
+    # TODO: gene subset selection?
     for gene in sorted(list(genes_intersection)):
         db_gene_ids.append(db_gene_ids_map[gene])
         data_gene_ids.append(data_gene_ids_map[gene])
@@ -56,11 +57,18 @@ def query_tissues(data, gene_names):
         tissue_lls[tissue_name] = []
         if len(data.shape) == 2:
             for k in range(data.shape[1]):
-                ll = bulk_data.log_prob_poisson(row_normed, data_subset[:,k])
+                ll = bulk_data.bulk_query(row_normed, data_subset[:,k], metric)
                 tissue_lls[tissue_name].append(ll)
         elif len(data.shape) == 1:
-            ll = bulk_data.log_prob_poisson(row_normed, data_subset)
+            ll = bulk_data.bulk_query(row_normed, data_subset, metric)
             tissue_lls[tissue_name].append(ll)
     tissue_file.close()
     return tissue_lls
 
+def query_samples(data, gene_name, metric='poisson'):
+    pass
+
+def query_samples_nmslib(data, gene_names, metric='cosinesimil'):
+    """
+    Uses nmslib to query the dataset (first building an index)
+    """
