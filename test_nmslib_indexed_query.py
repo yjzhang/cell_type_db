@@ -45,7 +45,7 @@ with open('test_data/10x_pooled_400_gene_names.tsv') as f:
 
 
 # select the 1000 genes with highest variance
-top_genes = max_variance_indices[:1000]
+top_genes = max_variance_indices[:20000]
 top_gene_names = gene_names[top_genes]
 
 # calculate overlap of gene names with test input data
@@ -87,8 +87,9 @@ potential metrics:
 index = nmslib.init(method='hnsw', space='cosinesimil')
 
 for i in tqdm(range(expression_data.shape[0])):
-    row = expression_data[i,:]
-    index.addDataPoint(i, row[db_gene_indices].astype(np.float32))
+    row = expression_data[i, db_gene_indices].astype(np.float32)
+    row = row/row.sum()
+    index.addDataPoint(i, row)
 
 index.createIndex()
 index.saveIndex('archs4/nmslib_cosine_index_data_subset')
@@ -98,7 +99,8 @@ print('test on data')
 correct_count = 0
 incorrect_count = 0
 for i in tqdm(range(expression_data.shape[0])):
-    row = expression_data[i,top_genes]
+    row = expression_data[i, db_gene_indices].astype(np.float32)
+    row = row/row.sum()
     ind, dist = index.knnQuery(row, 1)
     if ind[0] == i:
         correct_count += 1
@@ -112,6 +114,8 @@ for x in set(labels):
     print('label: ' + str(x))
     means = np.array(data[:,labels==x].mean(1)).flatten()
     means = means[data_gene_indices]
+    means = means/means.sum()
     ind, dist = index.knnQuery(means, 10)
     # get tissues corresponding to indices
     print(ind, dist)
+    print([sample_tissues[i] for i in ind])
