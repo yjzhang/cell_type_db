@@ -1,0 +1,105 @@
+
+
+## 2658 genes
+label: 0
+(array([30515, 56108, 69461, 69469, 56155, 31858, 32468, 32169, 32149,
+       32508], dtype=int32), array([0.75814646, 0.7662989 , 0.7734022 , 0.77414864, 0.7760106 ,
+       0.77790105, 0.77840126, 0.7787672 , 0.7794972 , 0.779511  ],
+      dtype=float32))
+['Bone marrow', 'stem cells', 'Cord Blood pre-cDCs', 'Cord Blood pre-cDCs', 'stem cells', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC']
+label: 1
+(array([32505, 32508, 31925, 32441, 32613, 32446, 32450, 32175, 32435,
+       31905], dtype=int32), array([0.7369876 , 0.73837197, 0.73838985, 0.74013025, 0.7417029 ,
+       0.74196017, 0.7420155 , 0.7436559 , 0.7439903 , 0.7452147 ],
+      dtype=float32))
+['LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC']
+label: 2
+(array([ 1444,  1443,  1448, 84619, 84652, 32197, 32505, 82878, 84651,
+       82875], dtype=int32), array([0.6970509 , 0.7017801 , 0.72255015, 0.7264565 , 0.72711563,
+       0.73081625, 0.73088497, 0.73236716, 0.73238605, 0.7324593 ],
+      dtype=float32))
+['HEK293 cells', 'HEK293 cells', 'K562 cells', 'endometrium epithelium', 'endometrium epithelium', 'LCL-derived iPSC', 'LCL-derived iPSC', 'F2-EiPSCs', 'endometrium epithelium', 'F2-CiPSCs']
+label: 4
+(array([ 1444,  1443,  1448, 32197, 32226, 32216, 84652, 32156, 32211,
+       32505], dtype=int32), array([0.6192163 , 0.63132954, 0.6495217 , 0.65626925, 0.65849817,
+       0.66056025, 0.6635449 , 0.66395223, 0.6653669 , 0.66696435],
+      dtype=float32))
+['HEK293 cells', 'HEK293 cells', 'K562 cells', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'endometrium epithelium', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC']
+label: 6
+(array([ 1444, 82878,  1443, 82875, 22133, 82880, 22134, 22135, 32505,
+        1448], dtype=int32), array([0.7968931 , 0.8022796 , 0.80266184, 0.8042948 , 0.8064002 ,
+       0.8087698 , 0.81139666, 0.81174135, 0.8119103 , 0.81494564],
+      dtype=float32))
+['HEK293 cells', 'F2-EiPSCs', 'HEK293 cells', 'F2-CiPSCs', 'colorectal primary adenocarcinoma', 'F2-FiPSCs', 'colorectal metastatic adenocarcinoma', 'human colorectal metastatic adenocarcinoma', 'LCL-derived iPSC', 'K562 cells']
+label: 7
+(array([82878, 82875, 82880,  1044, 24379, 84619,  1042, 22134,  1043,
+       84652], dtype=int32), array([0.77810067, 0.7783991 , 0.7842672 , 0.78531146, 0.7861331 ,
+       0.78724694, 0.7874086 , 0.7883731 , 0.7889213 , 0.78940064],
+      dtype=float32))
+['F2-EiPSCs', 'F2-CiPSCs', 'F2-FiPSCs', 'MDA-MB-453 cells transfected with MYC siRNA followed by DHT treatment', 'WT HUDEP-2', 'endometrium epithelium', 'MDA-MB-453 cells transfected with control siRNA followed by vehicle treatment', 'colorectal metastatic adenocarcinoma', 'MDA-MB-453 cells transfected with control siRNA followed by DHT treatment', 'endometrium epithelium']
+label: 8
+(array([58275, 58268, 58266, 58271, 58274, 58178, 58273, 58252, 58264,
+       58265], dtype=int32), array([0.85126436, 0.8540901 , 0.8552395 , 0.86000305, 0.8603708 ,
+       0.8618641 , 0.8623877 , 0.8635582 , 0.86383754, 0.86489475],
+      dtype=float32))
+['Neural progenitor cells', 'Neural progenitor cells', 'Neural progenitor cells', 'Neural progenitor cells', 'Neural progenitor cells', 'Neural progenitor cells', 'Neural progenitor cells', 'Motor neurons', 'Neural progenitor cells', 'Neural progenitor cells']
+label: 9
+(array([ 1444,  1443, 32505, 32226, 32441,  1448, 32175, 84652, 32191,
+       32197], dtype=int32), array([0.7350533 , 0.74715674, 0.75877726, 0.760387  , 0.76261646,
+       0.7632143 , 0.76345783, 0.7643177 , 0.7644181 , 0.76446784],
+      dtype=float32))
+['HEK293 cells', 'HEK293 cells', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'K562 cells', 'LCL-derived iPSC', 'endometrium epithelium', 'LCL-derived iPSC', 'LCL-derived iPSC']
+
+
+
+
+## 11531 genes
+
+label: 0
+(array([30515, 56108, 31911, 32169, 69469, 32468, 32708, 31866, 32467,
+       32437], dtype=int32), array([0.8690259 , 0.87426776, 0.8773123 , 0.8778616 , 0.87790364,
+       0.8784465 , 0.87908953, 0.8794909 , 0.8795608 , 0.8797446 ],
+      dtype=float32))
+['Bone marrow', 'stem cells', 'LCL-derived iPSC', 'LCL-derived iPSC', 'Cord Blood pre-cDCs', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC']
+label: 1
+(array([32505, 32441, 32508, 32446, 31866, 32613, 32435, 32450, 30515,
+       32149], dtype=int32), array([0.87151337, 0.8720962 , 0.8728138 , 0.8732244 , 0.87341607,
+       0.8736899 , 0.8741645 , 0.8742253 , 0.8745816 , 0.87494993],
+      dtype=float32))
+['LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'Bone marrow', 'LCL-derived iPSC']
+label: 2
+(array([84619, 82878, 82875, 32505, 32446, 32450, 32197,  1044, 54509,
+       82880], dtype=int32), array([0.8746551 , 0.8752431 , 0.8758315 , 0.87584865, 0.8760375 ,
+       0.8769262 , 0.87694365, 0.87770545, 0.87793446, 0.8779587 ],
+      dtype=float32))
+['endometrium epithelium', 'F2-EiPSCs', 'F2-CiPSCs', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'LCL-derived iPSC', 'MDA-MB-453 cells transfected with MYC siRNA followed by DHT treatment', 'ventral midbrain', 'F2-FiPSCs']
+label: 4
+(array([86310, 86317, 86315, 86312, 86295, 86298, 86258, 86289, 86297,
+       86266], dtype=int32), array([0.8862332 , 0.88673145, 0.887926  , 0.8882745 , 0.8891775 ,
+       0.89037573, 0.8923444 , 0.89328957, 0.8945775 , 0.89529   ],
+      dtype=float32))
+['SW1573 NSCLC cell line', 'SW1573 NSCLC cell line', 'SW1573 NSCLC cell line', 'SW1573 NSCLC cell line', 'SW1573 NSCLC cell line', 'SW1573 NSCLC cell line', 'NCI-H358 NSCLC cell line', 'LU-99A NSCLC cell line', 'SW1573 NSCLC cell line', 'LU-99A NSCLC cell line']
+label: 6
+(array([85994, 85992, 85990, 85996, 85993, 85995, 85991, 85997, 66571,
+       66573], dtype=int32), array([0.91352665, 0.9149195 , 0.9150737 , 0.91718674, 0.9172812 ,
+       0.9173226 , 0.91827387, 0.9187044 , 0.9193252 , 0.91974354],
+      dtype=float32))
+['neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'HEK293, ADAR2 overexpression', 'HEK293, ADAR2 overexpression']
+label: 7
+(array([85994, 85990, 85992, 85995, 85996, 85993, 85991, 85997,  9832,
+       97306], dtype=int32), array([0.90918696, 0.91088545, 0.9109979 , 0.9125299 , 0.91268677,
+       0.91282594, 0.9137531 , 0.91377085, 0.9164821 , 0.91807306],
+      dtype=float32))
+['neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'human gastric carcinoma', 'GIST48 cells with siETV1 knockdown']
+label: 8
+(array([24375, 24379, 24376, 82878, 82875, 24381, 82880, 24378,  1044,
+       24377], dtype=int32), array([0.9088377 , 0.9129534 , 0.9132117 , 0.9142602 , 0.9152268 ,
+       0.91595423, 0.9168343 , 0.9178437 , 0.91846347, 0.9197608 ],
+      dtype=float32))
+['WT HUDEP-2', 'WT HUDEP-2', 'WT HUDEP-2', 'F2-EiPSCs', 'F2-CiPSCs', 'LRF KO HUDEP-2', 'F2-FiPSCs', 'LRF KO HUDEP-2', 'MDA-MB-453 cells transfected with MYC siRNA followed by DHT treatment', 'LRF KO HUDEP-2']
+label: 9
+(array([85994, 85992, 85990, 85995, 85996, 85991, 85993, 85997, 66573,
+       66571], dtype=int32), array([0.90486693, 0.9065043 , 0.9073047 , 0.90890586, 0.9095889 ,
+       0.9103188 , 0.91046196, 0.9106885 , 0.9121322 , 0.91236496],
+      dtype=float32))
+['neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'neuroblastoma cells', 'HEK293, ADAR2 overexpression', 'HEK293, ADAR2 overexpression']

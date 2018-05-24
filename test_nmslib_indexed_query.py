@@ -74,7 +74,7 @@ print('number of genes: ' + str(len(overlapping_gene_names)))
 """
 https://github.com/nmslib/nmslib/blob/master/manual/manual.pdf
 
-potential metrics:
+potential spaces:
     cosinesimil (cosine similarity)
     l1 (l1 distance)
     l2
@@ -84,7 +84,8 @@ potential metrics:
     jsdivslow, jsdivfast, jsdivfastapprox (Jensen-Shannon divergence)
     kldivfast, kldivfastrq (KL divergence, right query)
 """
-index = nmslib.init(method='hnsw', space='cosinesimil')
+space = 'l1'
+index = nmslib.init(method='hnsw', space=space)
 
 for i in tqdm(range(expression_data.shape[0])):
     row = expression_data[i, db_gene_indices].astype(np.float32)
@@ -92,7 +93,7 @@ for i in tqdm(range(expression_data.shape[0])):
     index.addDataPoint(i, row)
 
 index.createIndex()
-index.saveIndex('archs4/nmslib_cosine_index_data_subset')
+index.saveIndex('archs4/nmslib_{0}_index_data_subset'.format(space))
 
 # test some points
 print('test on data')
@@ -108,6 +109,10 @@ for i in tqdm(range(expression_data.shape[0])):
         incorrect_count += 1
 print(correct_count, incorrect_count)
 
+# load index
+index = index.loadIndex('archs4/nmslib_{0}_index_data_subset'.format(space))
+
+
 # test on test dataset
 labels = data_mat['labels'].flatten()
 for x in set(labels):
@@ -119,3 +124,6 @@ for x in set(labels):
     # get tissues corresponding to indices
     print(ind, dist)
     print([sample_tissues[i] for i in ind])
+
+# test on individual cells rather than cluster means
+
