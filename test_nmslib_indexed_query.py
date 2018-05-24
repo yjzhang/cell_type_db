@@ -45,7 +45,7 @@ with open('test_data/10x_pooled_400_gene_names.tsv') as f:
 
 
 # select the 1000 genes with highest variance
-top_genes = max_variance_indices[:1000]
+top_genes = max_variance_indices[:20000]
 top_gene_names = gene_names[top_genes]
 
 # calculate overlap of gene names with test input data
@@ -74,7 +74,7 @@ print('number of genes: ' + str(len(overlapping_gene_names)))
 """
 https://github.com/nmslib/nmslib/blob/master/manual/manual.pdf
 
-potential metrics:
+potential spaces:
     cosinesimil (cosine similarity)
     l1 (l1 distance)
     l2
@@ -84,21 +84,24 @@ potential metrics:
     jsdivslow, jsdivfast, jsdivfastapprox (Jensen-Shannon divergence)
     kldivfast, kldivfastrq (KL divergence, right query)
 """
-index = nmslib.init(method='hnsw', space='cosinesimil')
+space = 'l1'
+index = nmslib.init(method='hnsw', space=space)
 
 for i in tqdm(range(expression_data.shape[0])):
-    row = expression_data[i,:]
-    index.addDataPoint(i, row[db_gene_indices].astype(np.float32))
+    row = expression_data[i, db_gene_indices].astype(np.float32)
+    row = row/row.sum()
+    index.addDataPoint(i, row)
 
 index.createIndex()
-index.saveIndex('archs4/nmslib_cosine_index_data_subset')
+index.saveIndex('archs4/nmslib_{0}_index_data_subset'.format(space))
 
 # test some points
 print('test on data')
 correct_count = 0
 incorrect_count = 0
 for i in tqdm(range(expression_data.shape[0])):
-    row = expression_data[i,top_genes]
+    row = expression_data[i, db_gene_indices].astype(np.float32)
+    row = row/row.sum()
     ind, dist = index.knnQuery(row, 1)
     if ind[0] == i:
         correct_count += 1
@@ -106,12 +109,21 @@ for i in tqdm(range(expression_data.shape[0])):
         incorrect_count += 1
 print(correct_count, incorrect_count)
 
+# load index
+index = index.loadIndex('archs4/nmslib_{0}_index_data_subset'.format(space))
+
+
 # test on test dataset
 labels = data_mat['labels'].flatten()
 for x in set(labels):
     print('label: ' + str(x))
     means = np.array(data[:,labels==x].mean(1)).flatten()
     means = means[data_gene_indices]
+    means = means/means.sum()
     ind, dist = index.knnQuery(means, 10)
     # get tissues corresponding to indices
     print(ind, dist)
+    print([sample_tissues[i] for i in ind])
+
+# test on individual cells rather than cluster means
+
