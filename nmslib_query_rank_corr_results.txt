@@ -1,0 +1,36 @@
+opening archs4 file...
+loading expression data...
+calculating variances...
+number of genes: 6642
+label: 0
+(68759, '0.10834511526725857')
+T4P mNET-Seq  siCPSF73
+elapsed time: 210.309674025
+label: 1
+(48931, '0.13293534603864418')
+human ES
+elapsed time: 210.247489929
+label: 2
+(42951, '0.09884503207875955')
+HeLa_T4P mNET-Seq  siCPSF73
+elapsed time: 217.539685011
+label: 4
+(68759, '0.08029226865059015')
+T4P mNET-Seq  siCPSF73
+elapsed time: 215.997167826
+label: 6
+(48931, '0.08543169221739261')
+human ES
+elapsed time: 212.779129028
+label: 7
+(88177, '0.0972408030519779')
+HCT116_Cyto_p53+
+elapsed time: 213.05986619
+label: 8
+(68759, '0.09270799402928565')
+T4P mNET-Seq  siCPSF73
+elapsed time: 212.135360956
+label: 9
+(42951, '0.08554009299750082')
+HeLa_T4P mNET-Seq  siCPSF73
+elapsed time: 214.251931906
