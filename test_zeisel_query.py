@@ -26,7 +26,7 @@ with open('Zeisel/genes.txt') as f:
 
 # data gene selection
 import uncurl
-gene_subset = uncurl.max_variance_genes(data, 1, 1)
+gene_subset = uncurl.max_variance_genes(data, 1, 0.3)
 data_gene_names = np.array(data_gene_names)
 data_gene_names = data_gene_names[sorted(gene_subset)]
 
@@ -57,7 +57,6 @@ for x in sorted(list(set(labels))):
     print('label: ' + str(x))
     means = np.array(data[:,labels==x].mean(1)).flatten()
     means = means[data_gene_indices]
-    means = means/means.sum()
     max_corr = 0.0
     best_id = 0
     t0 = time.time()
@@ -69,7 +68,7 @@ for x in sorted(list(set(labels))):
         be = bulk_expression[db_gene_indices, i]
         corr = scipy.stats.spearmanr(means, be)
         corr = corr[0]
-        pearson_corr = scipy.stats.pearsonr(means, be)[0]
+        pearson_corr = scipy.stats.pearsonr(means/means.sum(), be)[0]
         ll = bulk_data.bulk_query(be/be.sum(), means, 'poisson')
         pcs.append(pearson_corr)
         corrs.append(corr)
@@ -79,6 +78,10 @@ for x in sorted(list(set(labels))):
             best_id = i
     corr_matrix.append(corrs)
     pearson_matrix.append(pcs)
+    ll_max = max(lls)
+    if ll_max < 0:
+        ll_max = -ll_max
+    lls = [x/ll_max for x in lls]
     poisson_matrix.append(lls)
     # get tissues corresponding to indices
     print(best_id, max_corr)

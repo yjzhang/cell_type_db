@@ -69,7 +69,7 @@ def query_tissues(data, gene_names, metric='poisson'):
 def query_samples(data, gene_name, metric='poisson'):
     pass
 
-def query_samples_nmslib(data, gene_names, metric='cosinesimil'):
+def query_samples_nmslib(data, gene_names):
     """
     Uses nmslib to query the dataset (first building an index)
     """
