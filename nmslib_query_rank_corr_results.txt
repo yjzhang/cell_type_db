@@ -34,3 +34,45 @@ label: 9
 (42951, '0.08554009299750082')
 HeLa_T4P mNET-Seq  siCPSF73
 elapsed time: 214.251931906
+
+
+
+opening archs4 file...
+loading expression data...
+calculating variances...
+number of genes: 3333
+label: 0
+sample id: 68759, Spearman R: 0.0998399156748
+T4P mNET-Seq  siCPSF73
+elapsed time: 135.419404984
+label: 1
+sample id: 25030, Spearman R: 0.141354036767
+tumor biopsy
+elapsed time: 136.189656019
+label: 2
+sample id: 42951, Spearman R: 0.0997336861003
+HeLa_T4P mNET-Seq  siCPSF73
+elapsed time: 138.199856043
+label: 4
+sample id: 89312, Spearman R: 0.0869345969733
+Human Embryo
+elapsed time: 136.159173965
+label: 6
+sample id: 48931, Spearman R: 0.0821205469087
+human ES
+elapsed time: 136.07959199
+label: 7
+sample id: 17733, Spearman R: 0.0950903572485
+Nasopharyngeal
+elapsed time: 135.587527037
+label: 8
+sample id: 68759, Spearman R: 0.0798937426867
+T4P mNET-Seq  siCPSF73
+elapsed time: 134.578318119
+label: 9
+sample id: 25030, Spearman R: 0.0825228306739
+tumor biopsy
+elapsed time: 135.840531826
+Closing remaining open files:archs4/human_matrix.h5...done
+
+
