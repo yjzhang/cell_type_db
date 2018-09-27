@@ -49,7 +49,7 @@ expression = f.get_node('/data/expression')
 
 # normalize gene expression profiles so that they sum to 1
 normalized_expression = []
-for i, row in expression.iterrows():
+for i, row in enumerate(expression.iterrows()):
     tissue = sample_tissues[i]
     normed_row = row/row.sum()
     normalized_expression.append(normed_row)
@@ -69,3 +69,12 @@ for g in range(n_genes):
 
 binary_profiles = np.array(binary_profiles)
 np.save('binary_profiles.npy', binary_profiles)
+
+# TODO: buid nmslib index
+import nmslib
+index = nmslib.init(method='hnsw', space='bit_hamming')
+for i in range(binary_profiles.shape[0]):
+    index.addDataPoint(i, binary_profiles[i,:].astype(np.float32))
+
+index.createIndex()
+index.saveIndex('archs4/nmslib_bit_hamming_index')
