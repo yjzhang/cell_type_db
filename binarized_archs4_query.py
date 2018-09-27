@@ -47,20 +47,25 @@ sample_series = f.get_node('/meta/Sample_series_id').read()
 
 expression = f.get_node('/data/expression')
 
-# TODO: normalize gene expression profiles so that they sum to 1
+# normalize gene expression profiles so that they sum to 1
 normalized_expression = []
 for i, row in expression.iterrows():
     tissue = sample_tissues[i]
     normed_row = row/row.sum()
     normalized_expression.append(normed_row)
+normalized_expression = np.array(normalized_expression)
+np.save('normalized_expression.npy', normalized_expression)
 
-# TODO: binarize gene expression profiles.
+
+# binarize gene expression profiles.
 # do k-means across genes?
 # could also do k-means with k=2 to binarize...
-normalized_expression = np.array(normalized_expression)
 n_profiles, n_genes = normalized_expression.shape
 binary_profiles = []
 for g in range(n_genes):
     profile = normalized_expression[:,g]
     binary_profile = binarize(profile)
     binary_profiles.append(binary_profile)
+
+binary_profiles = np.array(binary_profiles)
+np.save('binary_profiles.npy', binary_profiles)
