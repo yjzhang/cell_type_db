@@ -25,6 +25,7 @@ def binarize(expression_profile):
         len(expression_profile), 1)))
     return clusters
 
+
 ARCHS4_FILENAME = 'archs4/human_matrix.h5'
 
 
@@ -55,6 +56,7 @@ for i, row in enumerate(expression.iterrows()):
     normalized_expression.append(normed_row)
 normalized_expression = np.array(normalized_expression)
 np.save('normalized_expression.npy', normalized_expression)
+print('done with normalized expression')
 
 
 # binarize gene expression profiles.
@@ -69,12 +71,5 @@ for g in range(n_genes):
 
 binary_profiles = np.array(binary_profiles)
 np.save('binary_profiles.npy', binary_profiles)
+print('done with binarization')
 
-# TODO: buid nmslib index
-import nmslib
-index = nmslib.init(method='hnsw', space='bit_hamming')
-for i in range(binary_profiles.shape[0]):
-    index.addDataPoint(i, binary_profiles[i,:].astype(np.float32))
-
-index.createIndex()
-index.saveIndex('archs4/nmslib_bit_hamming_index')
