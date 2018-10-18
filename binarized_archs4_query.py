@@ -94,13 +94,17 @@ sub_data_binarized = [binarize(sub_data[:,i]) for i in range(sub_data.shape[0])]
 sub_data_binarized = np.array(sub_data_binarized)
 result_indices = []
 result_distances = []
+result_tissues = []
 for i in range(sub_data_binarized.shape[0]):
     cell_data = sub_data_binarized[i,:]
     #query for top 5 cells
     ind, dist = index.knnQuery(cell_data, 5)
     result_indices.append(ind)
     result_distances.append(dist)
-    result_tissue = sample_tissues[ind[0]]
+    # top 5 tissues?
+    result_tissue = sample_tissues[ind]
+    print(result_tissue)
+    result_tissues.append(result_tissue)
 
 
 # save query results
