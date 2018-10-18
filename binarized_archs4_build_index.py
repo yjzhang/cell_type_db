@@ -15,16 +15,9 @@ from tqdm import tqdm
 import uncurl
 from uncurl_analysis import bulk_data
 
-def binarize(expression_profile):
-    """
-    Converts gene expression profile to a binary form using k-means?
-    """
-    from sklearn.cluster import KMeans
-    km = KMeans(2)
-    clusters = km.fit_predict(expression_profile.reshape((
-        len(expression_profile), 1)))
-    return clusters
-
+import binarization
+binarize = binarization.binarize_range
+method_name = 'range'
 
 ARCHS4_FILENAME = 'archs4/human_matrix.h5'
 
@@ -60,8 +53,6 @@ print('done with normalized expression')
 
 
 # binarize gene expression profiles.
-# do k-means across genes?
-# could also do k-means with k=2 to binarize...
 n_profiles, n_genes = normalized_expression.shape
 binary_profiles = []
 for g in range(n_genes):
@@ -70,6 +61,7 @@ for g in range(n_genes):
     binary_profiles.append(binary_profile)
 
 binary_profiles = np.array(binary_profiles)
-np.save('binary_profiles.npy', binary_profiles)
+np.save('binary_profiles_{0}.npy'.format(method_name), binary_profiles)
 print('done with binarization')
 
+# build search index???

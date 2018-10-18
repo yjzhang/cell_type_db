@@ -68,7 +68,11 @@ def binarize_mean(data):
         output[data >= m] = 1
         return output
     elif len(data.shape) == 2:
-        pass
+        output = np.zeros(data.shape)
+        medians = np.mean(data, 0)
+        for i in range(data.shape[1]):
+            output[:,i][data[:,i] >= medians[i]] = 1
+        return output
 
 if __name__ == '__main__':
     pass
