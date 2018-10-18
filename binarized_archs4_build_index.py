@@ -45,12 +45,16 @@ expression = f.get_node('/data/expression')
 normalized_expression = []
 for i, row in enumerate(expression.iterrows()):
     tissue = sample_tissues[i]
+    row = row.astype(float)
     normed_row = row/row.sum()
     normalized_expression.append(normed_row)
 normalized_expression = np.array(normalized_expression)
-np.save('normalized_expression.npy', normalized_expression)
+np.savez_compressed('normalized_expression.npz',
+        normalized_expression=normalized_expression)
 print('done with normalized expression')
 
+#normalized_expression = np.load('normalized_expression.npz')
+#normalized_expression = normalized_expression['normalized_expression']
 
 # binarize gene expression profiles.
 n_profiles, n_genes = normalized_expression.shape
@@ -61,7 +65,8 @@ for g in range(n_genes):
     binary_profiles.append(binary_profile)
 
 binary_profiles = np.array(binary_profiles)
-np.save('binary_profiles_{0}.npy'.format(method_name), binary_profiles)
+np.savez_compressed('binary_profiles_{0}.npz'.format(method_name),
+        binary_profiles=binary_profiles)
 print('done with binarization')
 
 # build search index???

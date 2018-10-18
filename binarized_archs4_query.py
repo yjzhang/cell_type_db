@@ -40,7 +40,8 @@ sample_series = f.get_node('/meta/Sample_series_id').read()
 expression = f.get_node('/data/expression')
 
 # load binarized ARCHS4 profiles
-binary_profiles = np.load('binary_profiles_{0}.npy'.format(method_name))
+binary_profiles = np.load('binary_profiles_{0}.npz'.format(method_name))
+binary_profiles = binary_profiles['binary_profiles']
 
 # load query data
 # load test data
