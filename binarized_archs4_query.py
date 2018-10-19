@@ -42,6 +42,7 @@ expression = f.get_node('/data/expression')
 # load binarized ARCHS4 profiles
 binary_profiles = np.load('binary_profiles_{0}.npz'.format(method_name))
 binary_profiles = binary_profiles['binary_profiles']
+binary_profiles = binary_profiles.astype(int)
 
 # load query data
 # load test data
@@ -79,11 +80,26 @@ print('number of overlapping genes: ' + str(n_genes))
 sub_binary_profiles = binary_profiles[:, db_gene_indices]
 sub_data = data[data_gene_indices, :].T
 
+# function for converting input array to string arrays?
+def to_string_array(array):
+    """
+    Converts a dense array to a string array?
+    """
+    output = []
+    for i in range(array.shape[0]):
+        output.append(' '.join([str(k) for k in array[i,:]]))
+    return output
+profiles_str = to_string_array(sub_binary_profiles)
+
 # TODO: buid nmslib index
 import nmslib
-index = nmslib.init(method='hnsw', space='bit_hamming')
-for i in range(sub_binary_profiles.shape[0]):
-    index.addDataPoint(i, sub_binary_profiles[i,:].astype(np.float32))
+index = nmslib.init(method='hnsw', space='bit_hamming',
+        data_type=nmslib.DataType.OBJECT_AS_STRING,
+        dtype=nmslib.DistType.INT)
+index.addDataPointBatch(profiles_str)
+#for i in range(sub_binary_profiles.shape[0]):
+#    index.addDataPoint(i, sub_binary_profiles[i,:].astype(np.float32))
+
 
 index.createIndex()
 index.saveIndex('archs4/nmslib_zeisel_genes_bit_hamming_index_{0}'.format(method_name))
@@ -93,13 +109,16 @@ print('finished building index')
 # binarize data, do query
 sub_data_binarized = [binarize(sub_data[:,i]) for i in range(sub_data.shape[0])]
 sub_data_binarized = np.array(sub_data_binarized)
+sub_data_str = to_string_array(sub_data_binarized)
+results = index.knnQueryBatch(sub_data_str, k=5)
 result_indices = []
 result_distances = []
 result_tissues = []
 for i in range(sub_data_binarized.shape[0]):
-    cell_data = sub_data_binarized[i,:]
+    ind_dist = results[i]
+    #cell_data = sub_data_binarized[i,:]
     #query for top 5 cells
-    ind, dist = index.knnQuery(cell_data, 5)
+    #ind, dist = index.knnQuery(cell_data, 5)
     result_indices.append(ind)
     result_distances.append(dist)
     # top 5 tissues?

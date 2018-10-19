@@ -29,9 +29,8 @@ def binarize_range(data):
     """
     if len(data.shape) == 1:
         mid = (data.max() - data.min())/2
-        new_points = np.array(data.shape)
+        new_points = np.zeros(data.shape)
         new_points[data > mid] = 1
-        new_points[data <= mid] = 0
         return new_points
     elif len(data.shape) == 2:
         # take max/min of each column

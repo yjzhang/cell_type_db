@@ -42,19 +42,19 @@ sample_series = f.get_node('/meta/Sample_series_id').read()
 expression = f.get_node('/data/expression')
 
 # normalize gene expression profiles so that they sum to 1
-normalized_expression = []
-for i, row in enumerate(expression.iterrows()):
-    tissue = sample_tissues[i]
-    row = row.astype(float)
-    normed_row = row/row.sum()
-    normalized_expression.append(normed_row)
-normalized_expression = np.array(normalized_expression)
-np.savez_compressed('normalized_expression.npz',
-        normalized_expression=normalized_expression)
-print('done with normalized expression')
+#normalized_expression = []
+#for i, row in enumerate(expression.iterrows()):
+#    tissue = sample_tissues[i]
+#    row = row.astype(float)
+#    normed_row = row/row.sum()
+#    normalized_expression.append(normed_row)
+#normalized_expression = np.array(normalized_expression)
+#np.savez_compressed('normalized_expression.npz',
+#        normalized_expression=normalized_expression)
+#print('done with normalized expression')
 
-#normalized_expression = np.load('normalized_expression.npz')
-#normalized_expression = normalized_expression['normalized_expression']
+normalized_expression = np.load('normalized_expression.npz')
+normalized_expression = normalized_expression['normalized_expression']
 
 # binarize gene expression profiles.
 n_profiles, n_genes = normalized_expression.shape
