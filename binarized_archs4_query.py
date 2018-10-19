@@ -26,17 +26,12 @@ f = tables.open_file(filename, 'r')
 
 genes = f.get_node('/meta/genes')
 gene_names = genes.read()
-
 sample_titles = f.get_node('/meta/Sample_title')
 sample_titles = sample_titles.read()
-
 # sample_source_names indicates the tissue type
 sample_tissues = f.get_node('/meta/Sample_source_name_ch1').read()
-
 sample_geo = f.get_node('/meta/Sample_geo_accession').read()
-
 sample_series = f.get_node('/meta/Sample_series_id').read()
-
 expression = f.get_node('/data/expression')
 
 # load binarized ARCHS4 profiles
@@ -52,10 +47,11 @@ data = sparse.csc_matrix(data_mat['Dat'])
 labels = data_mat['ActLabs'].flatten()
 data_gene_names = []
 with open('Zeisel/genes.txt') as f:
-    data_gene_names = [x.strip() for x in f.readlines()]
+    data_gene_names = [x.strip().upper() for x in f.readlines()]
 
 # data gene selection
-gene_subset = uncurl.max_variance_genes(data, 5, 0.2)
+gene_subset = uncurl.max_variance_genes(data, 1, 0.3)
+print(len(gene_subset))
 data_gene_names = np.array(data_gene_names)
 data_gene_names = data_gene_names[sorted(gene_subset)]
 
@@ -75,6 +71,7 @@ for gene_name in overlapping_gene_names:
     data_gene_indices.append(data_gene_ids_map[gene_name])
 n_genes = len(overlapping_gene_names)
 print('number of overlapping genes: ' + str(n_genes))
+print(overlapping_gene_names)
 
 # take subset of binary_profiles 
 sub_binary_profiles = binary_profiles[:, db_gene_indices]
@@ -89,6 +86,7 @@ def to_string_array(array):
     for i in range(array.shape[0]):
         output.append(' '.join([str(k) for k in array[i,:]]))
     return output
+
 profiles_str = to_string_array(sub_binary_profiles)
 
 # TODO: buid nmslib index
@@ -99,15 +97,13 @@ index = nmslib.init(method='hnsw', space='bit_hamming',
 index.addDataPointBatch(profiles_str)
 #for i in range(sub_binary_profiles.shape[0]):
 #    index.addDataPoint(i, sub_binary_profiles[i,:].astype(np.float32))
-
-
 index.createIndex()
 index.saveIndex('archs4/nmslib_zeisel_genes_bit_hamming_index_{0}'.format(method_name))
 print('finished building index')
 
 # TODO: do querying on binarized data
 # binarize data, do query
-sub_data_binarized = [binarize(sub_data[:,i]) for i in range(sub_data.shape[0])]
+sub_data_binarized = [binarize(sub_data[:,i].toarray()) for i in range(sub_data.shape[0])]
 sub_data_binarized = np.array(sub_data_binarized)
 sub_data_str = to_string_array(sub_data_binarized)
 results = index.knnQueryBatch(sub_data_str, k=5)

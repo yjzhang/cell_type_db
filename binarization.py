@@ -37,7 +37,7 @@ def binarize_range(data):
         midpoints = (data.max(1) - data.min(1))/2
         new_points = np.zeros(data.shape)
         for i in range(data.shape[1]):
-            new_points[:,i][data[:,i] > midpoints] = 1
+            new_points[data[:,i] > midpoints[i], i] = 1
         return new_points
 
 def binarize_median(data):
@@ -54,7 +54,7 @@ def binarize_median(data):
         output = np.zeros(data.shape)
         medians = np.median(data, 0)
         for i in range(data.shape[1]):
-            output[:,i][data[:,i] >= medians[i]] = 1
+            output[data[:,i] >= medians[i], i] = 1
         return output
 
 def binarize_mean(data):
