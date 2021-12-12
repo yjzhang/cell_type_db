@@ -1,14 +1,12 @@
 # builds a nmslib index of all archs4 profiles...
 
-import pickle
 
 import nmslib
 import numpy as np
 import tables
-from scipy import sparse
 from tqdm import tqdm
 
-filename = 'archs4/human_matrix.h5'
+filename = 'archs4/human_matrix_v11.h5'
 
 print('opening archs4 file...')
 f = tables.open_file(filename, 'r')
@@ -27,6 +25,14 @@ sample_series = f.get_node('/meta/Sample_series_id').read()
 expression = f.get_node('/data/expression')
 
 # TODO: get a "small gene set" - highest variance genes?
+# no... do a differential expression and find the most differentially expressed genes in each cell type.
+
+tissue_means_filename = 'archs4/tissue_means.h5'
+tissue_means_table = f.get_node('/means').read()
+tissue_names_table = f.get_node('/tissues').read()
+
+# calculate differential expression...
+
 # calculate variance over the entire expression matrix...
 print('loading expression data...')
 expression_data = expression.read()

@@ -13,9 +13,6 @@ bulk_gene_names = bulk_data['gene.symbol']
 bulk_column_names = bulk_data.columns[1:]
 bulk_expression = bulk_data.iloc[:, 1:].as_matrix()
 
-# load mat bulk data
-bulk_data = scipy.io.loadmat('Zeisel/NeuronalMeansNdata.mat')
-
 # TODO: get a "small gene set" - highest variance genes?
 # calculate variance over the entire expression matrix...
 
